@@ -13,7 +13,7 @@
 	<script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
 
 	<!-- Our script -->
-	<script src='signIn.js'></script>
+	<script src='signUp.js'></script>
     <link rel="icon" href="http://getbootstrap.com/favicon.ico">
  
     <title>Ace the APCS Exam</title>
@@ -23,21 +23,30 @@
 
 </head>
 <body>
- 
     <div ng-controller='HomeCtrl' class="container">
         <div class="jumbotron" style="padding-bottom:0px;">
             <h2>Sign Up</h2>
         </div>
-        <form class="form-signin" role="form">
-        <!-- ng-model directive to email + password elements -->
-            <input ng-model="user.email" type="email" class="form-control" placeholder="Email address" required="" autofocus="">
-            <input ng-model="user.password" type="password" class="form-control" placeholder="Password" required="">
-           
-        <!-- on click, check authorization w/ event func -->
-        <button ng-click="signUp(event)" class="btn btn-lg btn-primary btn-block">Sign Up</button>
-      </form>
+        <form class="form-signin" name="regForm">
+    <div class="form-group" ng-class="{ 'has-error' : regForm.email.$invalid }">
+    <label>Email</label>
+    <input type="email" name="email" class="form-control" ng-model="user.email">
+    <p class="help-block" ng-show="regForm.email.$invalid">Enter a valid email.</p>
+</div>
  
+<div class="form-group" ng-class="{ 'has-error' : regForm.password.$invalid }">
+    <label>Password</label>
+    <input type="password" name="password" class="form-control" ng-model="user.password" ng-minlength="8">
+    <p class="help-block" ng-show="regForm.password.$error.minlength">Min password length is 8 characters.</p>
+</div>
+    <button type="button" class="btn btn-lg btn-primary btn-block">Sign Up</button>
+     <p>
+    <a href="/app/signin/signin.html">Already have an account? Sign In</a>
+  </p>
+</form>
     </div>
+
+
 </body>
 
 </html>

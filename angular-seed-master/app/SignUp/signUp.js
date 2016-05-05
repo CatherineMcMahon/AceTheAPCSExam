@@ -6,13 +6,6 @@ var myApp = angular.module('myApp', ['ngRoute', 'firebase']);
 
 myApp.config( ['$routeProvider', function($routeProvider) {
 		// Set up the routes
-
-		// When home is use go to home/home.html 
-		// the controll for this page is HomeCtrl (See Below)
-		$routeProvider.when('/home', {
-			templateUrl : 'home/home.html',
-			controller : 'HomeCtrl'
-		});
 }]);
 
 // Setup the HomeCtrl Controller
@@ -20,18 +13,24 @@ myApp.config( ['$routeProvider', function($routeProvider) {
 myApp.controller('HomeCtrl', ['$scope', function($scope) {
 	var firebase = new Firebase("https://acetheapcsexam.firebaseio.com"); 
 
-	// Setup the signIn method
-	// See https://www.firebase.com/docs/web/guide/login/password.html
-	$scope.signIn = function(evt) {
-		event.preventDefault();
+	var uname = $scope.user.email;
+	var pw = $scope.user.password;
 
-		console.log("SIGN IN Called");
-		var uname = $scope.user.email;
-		var pw = $scope.user.password;
-		
-		// Try auth with a password
-		// The included function is called when we 
-		// have a response
+	console.log("SIGN UP Called");
+	// Sign up 	
+	if(email&&password)	{
+	firebase.createUser({
+  			email : uname,
+			password : pw
+		}, function(error, userData) {
+  			if (error) {
+    			console.log("Error creating user:", error);
+  			} else {
+    			console.log("Successfully created user account with uid:", userData.uid);
+  			}
+	})};
+
+		//sign in
 		firebase.authWithPassword( {
 			email : uname,
 			password : pw
@@ -42,10 +41,10 @@ myApp.controller('HomeCtrl', ['$scope', function($scope) {
 				}
 				else if( user ) {
 					console.log("AUTH SUCCESS");
+					window.location.href = '/app/game.html';
 				}
 				else {
 					console.log("USER LOGGED OUT");
 				}
 		});
-	};
-}]);
+	}]); //ends myApp.controller(...)

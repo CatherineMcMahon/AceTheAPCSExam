@@ -31,12 +31,14 @@
         <form class="form-signin" role="form">
         <!-- ng-model directive to email + password elements -->
             <input ng-model="user.email" type="email" class="form-control" placeholder="Email address" required="" autofocus="">
-            <input ng-model="user.password" type="password" class="form-control" placeholder="Password" required="">
-           
+            <input ng-model="user.password" type="password" class="form-control" placeholder="Password" required="">    
         <!-- on click, check authorization w/ event func -->
         <button ng-click="signIn(event)" class="btn btn-lg btn-primary btn-block">Sign In</button>
+         <p>
+            <a href="/app/signup/signup.html">New user? Sign Up</a>
+        </p>
       </form>
- 
+      </div>
     </div>
 </body>
 

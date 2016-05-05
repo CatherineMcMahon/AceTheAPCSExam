@@ -6,13 +6,6 @@ var myApp = angular.module('myApp', ['ngRoute', 'firebase']);
 
 myApp.config( ['$routeProvider', function($routeProvider) {
 		// Set up the routes
-
-		// When home is use go to home/home.html 
-		// the controll for this page is HomeCtrl (See Below)
-		$routeProvider.when('/home', {
-			templateUrl : 'home/home.html',
-			controller : 'HomeCtrl'
-		});
 }]);
 
 // Setup the HomeCtrl Controller
@@ -42,6 +35,7 @@ myApp.controller('HomeCtrl', ['$scope', function($scope) {
 				}
 				else if( user ) {
 					console.log("AUTH SUCCESS");
+					window.location.href = '/app/game.html';
 				}
 				else {
 					console.log("USER LOGGED OUT");
